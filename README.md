@@ -1,12 +1,29 @@
-# React + Vite
+# Tripleten - Around The U.S.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+O **Around The U.S.** é uma página interativa onde os usuários podem adicionar, remover e curtir fotos de locais dos Estados Unidos e também podem editar informações pessoais do perfil.
 
-Currently, two official plugins are available:
+## 🚀 Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Perfil do usuário:** Adicione informações pessoais como nome e uma breve descrição sobre você.
+- **Galeria de fotos:** Veja, adicione ou remova fotos de paisagens de lugares.
+- **Interatividade:** Curta fotos da galeria.
 
-## Expanding the ESLint configuration
+## 🛠️ Tecnologias e Técnicas Usadas
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **HTML:** Estrutura do site.
+- **CSS:** Estilização e design da página.
+- **JavaScript e React:** Funcionalidade de interação com o usuário (abrir/fechar popups, editar perfil, adicionar e remover imagens).
+- **Responsividade:** O design foi feito para ser responsivo, adaptando-se a diferentes tamanhos de tela, com no mínimo 320px de largura.
+
+## 📸 Demonstração do projeto
+
+![Preview da página](./images/captura-de-tela.png)
+
+## 🌐 Acesse o site:
+
+https://lorinogueira.github.io/web_project_around/
+
+## 👩‍💻 Autor
+
+Desenvolvido por [Lorena Nogueira](https://github.com/lorinogueira).  
+Conecte-se comigo no [LinkedIn](https://www.linkedin.com/in/lorenamendes0/).
