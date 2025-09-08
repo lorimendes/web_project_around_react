@@ -1,0 +1,43 @@
+.header__container {
+  max-width: 880px;
+  margin: 0 auto 40px;
+}
+
+.header__logo {
+  padding: 45px 0 41px;
+}
+
+.header__line {
+  max-width: 880px;
+  opacity: 0.7;
+  border: 1px solid #545454;
+}
+
+@media screen and (max-width: 1024px) {
+  .header__container {
+    margin: 0 60px 40px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .header__container {
+    margin: 0 0 42px;
+  }
+  .header__logo {
+    padding: 45px 0 41px 60px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .header__logo {
+    padding: 37px 0 36px 42px;
+    width: 150px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .header__logo {
+    padding: 28px 0 32px 27px;
+    width: 126px;
+  }
+}
