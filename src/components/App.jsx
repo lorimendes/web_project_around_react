@@ -33,20 +33,26 @@ function App() {
 
   const handleUpdateUser = (userInfo) => {
     (async () => {
-      await api
-        .updateProfile(
-          "https://around-api.pt-br.tripleten-services.com/v1/users/me",
-          userInfo
-        )
-        .then((newUserInfo) => {
-          setCurrentUser(newUserInfo);
-          handleClosePopup();
-        });
+      await api.updateProfile(userInfo).then((newUserInfo) => {
+        setCurrentUser(newUserInfo);
+        handleClosePopup();
+      });
+    })();
+  };
+
+  const handleUpdateAvatar = (avatar) => {
+    (async () => {
+      await api.updateAvatar(avatar).then((newUserInfo) => {
+        setCurrentUser(newUserInfo);
+        handleClosePopup();
+      });
     })();
   };
 
   return (
-    <CurrentUserContext.Provider value={{ currentUser, handleUpdateUser }}>
+    <CurrentUserContext.Provider
+      value={{ currentUser, handleUpdateUser, handleUpdateAvatar }}
+    >
       <div className="page">
         <Header src={logo} />
         <Main

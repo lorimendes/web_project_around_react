@@ -15,18 +15,21 @@ class Api {
     });
   }
 
-  updateProfile(url, item) {
-    return fetch(url, {
-      method: "PATCH",
-      headers: {
-        authorization: this.token,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: item.name,
-        about: item.about,
-      }),
-    })
+  updateProfile(item) {
+    return fetch(
+      "https://around-api.pt-br.tripleten-services.com/v1/users/me",
+      {
+        method: "PATCH",
+        headers: {
+          authorization: this.token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: item.name,
+          about: item.about,
+        }),
+      }
+    )
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -37,17 +40,20 @@ class Api {
       });
   }
 
-  updateAvatar(url, item) {
-    return fetch(url, {
-      method: "PATCH",
-      headers: {
-        authorization: this.token,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        avatar: item.avatar,
-      }),
-    })
+  updateAvatar(item) {
+    return fetch(
+      "https://around-api.pt-br.tripleten-services.com/v1/users/me/avatar",
+      {
+        method: "PATCH",
+        headers: {
+          authorization: this.token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          avatar: item.avatar,
+        }),
+      }
+    )
       .then((res) => {
         if (res.ok) {
           return res.json();
