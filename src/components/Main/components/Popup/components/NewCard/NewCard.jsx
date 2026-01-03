@@ -1,6 +1,18 @@
+import { useContext, useState } from "react";
+import { CurrentUserContext } from "../../../../../../contexts/CurrentUserContext";
+
 function NewCard() {
+  const { handleAddCardSubmit } = useContext(CurrentUserContext);
+  const [name, setName] = useState();
+  const [link, setLink] = useState();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    handleAddCardSubmit({ name, link });
+  };
+
   return (
-    <form className="popup__form" noValidate>
+    <form className="popup__form" noValidate onSubmit={handleSubmit}>
       <input
         id="title-input"
         className="popup__input popup__input_content_title-card"
@@ -9,6 +21,7 @@ function NewCard() {
         maxLength="30"
         name="name"
         placeholder="Título"
+        onChange={(event) => setName(event.target.value)}
         required
       />
       <span className="title-input-error popup__input-error"></span>
@@ -18,6 +31,7 @@ function NewCard() {
         type="url"
         name="link"
         placeholder="Link de imagem"
+        onChange={(event) => setLink(event.target.value)}
         required
       />
       <span className="link-input-error popup__input-error"></span>

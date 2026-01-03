@@ -4,11 +4,9 @@ import NewCard from "./components/Popup/components/NewCard/NewCard.jsx";
 import EditAvatar from "./components/Popup/components/EditAvatar/EditAvatar.jsx";
 import EditProfile from "./components/Popup/components/EditProfile/EditProfile.jsx";
 import Card from "./components/Card/Card.jsx";
-import { api } from "../../utils/api.js";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
 
 function Main(props) {
-  const [cards, setCards] = useState();
   const { currentUser } = useContext(CurrentUserContext);
 
   const newCardPopup = { title: "Novo Local", children: <NewCard /> };
@@ -20,32 +18,6 @@ function Main(props) {
     title: "Editar perfil",
     children: <EditProfile />,
   };
-
-  async function handleCardLike(card) {
-    try {
-      const updatedCard = await api.updateLike(
-        `https://around-api.pt-br.tripleten-services.com/v1/cards/${card._id}/likes`,
-        card
-      );
-      setCards((state) =>
-        state.map((currentCard) =>
-          currentCard._id == card._id ? updatedCard : currentCard
-        )
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  useEffect(() => {
-    api
-      .getInfoFromApi(
-        "https://around-api.pt-br.tripleten-services.com/v1/cards/"
-      )
-      .then((cardsFromApi) => {
-        setCards(cardsFromApi);
-      });
-  }, []);
 
   return (
     <main className="content">
@@ -79,8 +51,8 @@ function Main(props) {
         ></button>
       </section>
       <ul className="gallery">
-        {cards &&
-          cards.map((card) => {
+        {props.cards &&
+          props.cards.map((card) => {
             return (
               <Card
                 key={card._id}
@@ -88,7 +60,7 @@ function Main(props) {
                 link={card.link}
                 isLiked={card.isLiked}
                 onOpen={props.onOpenPopup}
-                onCardLike={() => handleCardLike(card)}
+                onCardLike={() => props.onCardLike(card)}
               />
             );
           })}

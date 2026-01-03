@@ -64,8 +64,8 @@ class Api {
       });
   }
 
-  postCard(url, item) {
-    return fetch(url, {
+  postCard(item) {
+    return fetch("https://around-api.pt-br.tripleten-services.com/v1/cards/", {
       method: "POST",
       headers: {
         authorization: this.token,
