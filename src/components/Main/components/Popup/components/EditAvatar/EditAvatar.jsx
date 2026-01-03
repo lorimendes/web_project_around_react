@@ -1,9 +1,11 @@
-import { useRef, useContext } from "react";
+import { useRef, useContext, useEffect } from "react";
 import { CurrentUserContext } from "../../../../../../contexts/CurrentUserContext";
+import { FormValidator } from "../../../../../../utils/formValidator";
 
 function EditAvatar() {
   const { handleUpdateAvatar } = useContext(CurrentUserContext);
   const avatarRef = useRef();
+  const formRef = useRef();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -13,8 +15,18 @@ function EditAvatar() {
     });
   };
 
+  useEffect(() => {
+    const formValidator = new FormValidator(formRef.current);
+    formValidator.enableValidation();
+  }, []);
+
   return (
-    <form className="popup__form" noValidate onSubmit={handleSubmit}>
+    <form
+      ref={formRef}
+      className="popup__form"
+      noValidate
+      onSubmit={handleSubmit}
+    >
       <input
         ref={avatarRef}
         id="avatar-input"

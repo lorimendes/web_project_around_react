@@ -1,18 +1,30 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useRef, useEffect } from "react";
 import { CurrentUserContext } from "../../../../../../contexts/CurrentUserContext";
+import { FormValidator } from "../../../../../../utils/formValidator";
 
 function NewCard() {
   const { handleAddCardSubmit } = useContext(CurrentUserContext);
   const [name, setName] = useState();
   const [link, setLink] = useState();
+  const formRef = useRef();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     handleAddCardSubmit({ name, link });
   };
 
+  useEffect(() => {
+    const formValidator = new FormValidator(formRef.current);
+    formValidator.enableValidation();
+  }, []);
+
   return (
-    <form className="popup__form" noValidate onSubmit={handleSubmit}>
+    <form
+      ref={formRef}
+      className="popup__form"
+      noValidate
+      onSubmit={handleSubmit}
+    >
       <input
         id="title-input"
         className="popup__input popup__input_content_title-card"
