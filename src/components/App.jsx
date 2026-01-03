@@ -7,7 +7,7 @@ import { api } from "../utils/api.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 function App() {
-  const [currentUser, setCurrentUser] = useState({}); //pq criar essa variável nesse arquivo e não no "Main"?
+  const [currentUser, setCurrentUser] = useState({});
   const [popup, setPopup] = useState(null);
   const [cards, setCards] = useState();
 
@@ -65,6 +65,18 @@ function App() {
     }
   }
 
+  const handleCardDelete = (card) => {
+    (async () => {
+      await api
+        .deleteCard(
+          `https://around-api.pt-br.tripleten-services.com/v1/cards/${card._id}`
+        )
+        .then(() => {
+          setCards(cards.filter((currentCard) => currentCard._id !== card._id));
+        });
+    })();
+  };
+
   const handleAddCardSubmit = (newCard) => {
     (async () => {
       await api.postCard(newCard).then((newCard) => {
@@ -101,6 +113,7 @@ function App() {
           popup={popup}
           cards={cards}
           onCardLike={handleCardLike}
+          onCardDelete={handleCardDelete}
         />
         <Footer />
       </div>

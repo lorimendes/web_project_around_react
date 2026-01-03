@@ -61,6 +61,7 @@ function Main(props) {
                 isLiked={card.isLiked}
                 onOpen={props.onOpenPopup}
                 onCardLike={() => props.onCardLike(card)}
+                onCardDelete={() => props.onCardDelete(card)}
               />
             );
           })}
