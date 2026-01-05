@@ -5,6 +5,7 @@ import EditAvatar from "./components/Popup/components/EditAvatar/EditAvatar.jsx"
 import EditProfile from "./components/Popup/components/EditProfile/EditProfile.jsx";
 import Card from "./components/Card/Card.jsx";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
+import ConfirmDelete from "./components/Popup/components/ConfirmDelete/ConfirmDelete.jsx";
 
 function Main(props) {
   const { currentUser } = useContext(CurrentUserContext);
@@ -17,6 +18,10 @@ function Main(props) {
   const editProfilePopup = {
     title: "Editar perfil",
     children: <EditProfile />,
+  };
+  const confirmDeletePopup = {
+    title: "Tem certeza?",
+    children: <ConfirmDelete />,
   };
 
   return (
@@ -61,7 +66,10 @@ function Main(props) {
                 isLiked={card.isLiked}
                 onOpen={props.onOpenPopup}
                 onCardLike={() => props.onCardLike(card)}
-                onCardDelete={() => props.onCardDelete(card)}
+                onOpenConfirmDelete={() => {
+                  props.onOpenPopup(confirmDeletePopup);
+                  props.onClickDeleteCard(card);
+                }}
               />
             );
           })}

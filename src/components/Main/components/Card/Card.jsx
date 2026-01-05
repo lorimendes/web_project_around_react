@@ -1,6 +1,13 @@
 import ImagePopup from "../Popup/components/ImagePopup/ImagePopup";
 
-function Card({ name, link, onOpen, isLiked, onCardLike, onCardDelete }) {
+function Card({
+  name,
+  link,
+  onOpen,
+  isLiked,
+  onCardLike,
+  onOpenConfirmDelete,
+}) {
   const cardLikeButtonClassName = `gallery__like-button ${
     isLiked ? "gallery__like-button_active" : ""
   }`;
@@ -27,7 +34,7 @@ function Card({ name, link, onOpen, isLiked, onCardLike, onCardDelete }) {
         <button
           className="gallery__remove-button"
           aria-label="Remover card"
-          onClick={onCardDelete}
+          onClick={onOpenConfirmDelete}
         ></button>
       </div>
     </li>

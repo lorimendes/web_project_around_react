@@ -11,6 +11,7 @@ function App() {
   const [popup, setPopup] = useState(null);
   const [cards, setCards] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const [cardToDelete, setCardToDelete] = useState(null);
 
   function handleOpenPopup(popup) {
     setPopup(popup);
@@ -28,7 +29,6 @@ function App() {
         )
         .then((userInfo) => {
           setCurrentUser(userInfo);
-          console.log(userInfo);
         });
     })();
   }, []);
@@ -79,14 +79,27 @@ function App() {
     }
   }
 
-  const handleCardDelete = (card) => {
+  const handleCardDeleteClick = (card) => {
+    setCardToDelete(card);
+  };
+
+  const handleCardDeleteConfirm = () => {
+    if (!cardToDelete) return;
+    setIsLoading(true);
     (async () => {
       await api
         .deleteCard(
-          `https://around-api.pt-br.tripleten-services.com/v1/cards/${card._id}`
+          `https://around-api.pt-br.tripleten-services.com/v1/cards/${cardToDelete._id}`
         )
         .then(() => {
-          setCards(cards.filter((currentCard) => currentCard._id !== card._id));
+          setCards(
+            cards.filter((currentCard) => currentCard._id !== cardToDelete._id)
+          );
+          handleClosePopup();
+        })
+        .finally(() => {
+          setIsLoading(false);
+          setCardToDelete(null);
         });
     })();
   };
@@ -123,6 +136,7 @@ function App() {
         handleUpdateUser,
         handleUpdateAvatar,
         handleAddCardSubmit,
+        handleCardDeleteConfirm,
         isLoading,
       }}
     >
@@ -134,7 +148,7 @@ function App() {
           popup={popup}
           cards={cards}
           onCardLike={handleCardLike}
-          onCardDelete={handleCardDelete}
+          onClickDeleteCard={handleCardDeleteClick}
         />
         <Footer />
       </div>
