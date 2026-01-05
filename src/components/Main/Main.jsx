@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import Popup from "./components/Popup/Popup.jsx";
 import NewCard from "./components/Popup/components/NewCard/NewCard.jsx";
 import EditAvatar from "./components/Popup/components/EditAvatar/EditAvatar.jsx";

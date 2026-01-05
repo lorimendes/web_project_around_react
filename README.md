@@ -24,7 +24,7 @@ O **Around The U.S.** é uma página interativa desenvolvida em React que permit
 
 ## 🌐 Acesse o site:
 
-https://lorinogueira.github.io/web_project_around/
+https://lorimendes.github.io/web_project_around_react/
 
 ## 👩‍💻 Autor
 
