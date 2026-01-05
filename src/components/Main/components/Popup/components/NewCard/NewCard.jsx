@@ -3,7 +3,7 @@ import { CurrentUserContext } from "../../../../../../contexts/CurrentUserContex
 import { FormValidator } from "../../../../../../utils/formValidator";
 
 function NewCard() {
-  const { handleAddCardSubmit } = useContext(CurrentUserContext);
+  const { handleAddCardSubmit, isLoading } = useContext(CurrentUserContext);
   const [name, setName] = useState();
   const [link, setLink] = useState();
   const formRef = useRef();
@@ -49,10 +49,12 @@ function NewCard() {
       <span className="link-input-error popup__input-error"></span>
       <button
         id="add-card-button"
-        className="popup__submit-button"
+        className={`popup__submit-button ${
+          isLoading ? "popup__submit-button_loading" : ""
+        }`}
         type="submit"
       >
-        Criar
+        {isLoading ? "Criando..." : "Criar"}
       </button>
     </form>
   );

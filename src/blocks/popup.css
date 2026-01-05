@@ -82,6 +82,11 @@
   opacity: 80%;
 }
 
+.popup__submit-button_loading {
+  opacity: 80%;
+  pointer-events: none;
+}
+
 .popup__submit-button_inactive {
   border: 1px solid #000000;
   background-color: #ffffff;

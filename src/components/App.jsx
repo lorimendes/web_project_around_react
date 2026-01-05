@@ -10,6 +10,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [popup, setPopup] = useState(null);
   const [cards, setCards] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleOpenPopup(popup) {
     setPopup(popup);
@@ -27,25 +28,38 @@ function App() {
         )
         .then((userInfo) => {
           setCurrentUser(userInfo);
+          console.log(userInfo);
         });
     })();
   }, []);
 
   const handleUpdateUser = (userInfo) => {
+    setIsLoading(true);
     (async () => {
-      await api.updateProfile(userInfo).then((newUserInfo) => {
-        setCurrentUser(newUserInfo);
-        handleClosePopup();
-      });
+      await api
+        .updateProfile(userInfo)
+        .then((newUserInfo) => {
+          setCurrentUser(newUserInfo);
+          handleClosePopup();
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     })();
   };
 
   const handleUpdateAvatar = (avatar) => {
+    setIsLoading(true);
     (async () => {
-      await api.updateAvatar(avatar).then((newUserInfo) => {
-        setCurrentUser(newUserInfo);
-        handleClosePopup();
-      });
+      await api
+        .updateAvatar(avatar)
+        .then((newUserInfo) => {
+          setCurrentUser(newUserInfo);
+          handleClosePopup();
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     })();
   };
 
@@ -78,11 +92,17 @@ function App() {
   };
 
   const handleAddCardSubmit = (newCard) => {
+    setIsLoading(true);
     (async () => {
-      await api.postCard(newCard).then((newCard) => {
-        handleClosePopup();
-        setCards([newCard, ...cards]);
-      });
+      await api
+        .postCard(newCard)
+        .then((newCard) => {
+          handleClosePopup();
+          setCards([newCard, ...cards]);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     })();
   };
 
@@ -103,6 +123,7 @@ function App() {
         handleUpdateUser,
         handleUpdateAvatar,
         handleAddCardSubmit,
+        isLoading,
       }}
     >
       <div className="page">

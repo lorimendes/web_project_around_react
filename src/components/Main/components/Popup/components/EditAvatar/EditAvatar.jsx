@@ -3,7 +3,7 @@ import { CurrentUserContext } from "../../../../../../contexts/CurrentUserContex
 import { FormValidator } from "../../../../../../utils/formValidator";
 
 function EditAvatar() {
-  const { handleUpdateAvatar } = useContext(CurrentUserContext);
+  const { handleUpdateAvatar, isLoading } = useContext(CurrentUserContext);
   const avatarRef = useRef();
   const formRef = useRef();
 
@@ -37,8 +37,14 @@ function EditAvatar() {
         required
       />
       <span className="avatar-input-error popup__input-error"></span>
-      <button id="avatar-button" className="popup__submit-button" type="submit">
-        Salvar
+      <button
+        id="avatar-button"
+        className={`popup__submit-button ${
+          isLoading ? "popup__submit-button_loading" : ""
+        }`}
+        type="submit"
+      >
+        {isLoading ? "Salvando..." : "Salvar"}
       </button>
     </form>
   );

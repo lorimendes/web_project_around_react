@@ -4,7 +4,7 @@ import { FormValidator } from "../../../../../../utils/formValidator";
 
 function EditProfile() {
   const userContext = useContext(CurrentUserContext);
-  const { currentUser, handleUpdateUser } = userContext;
+  const { currentUser, handleUpdateUser, isLoading } = userContext;
   const formRef = useRef();
 
   const [name, setName] = useState(currentUser?.name);
@@ -63,10 +63,12 @@ function EditProfile() {
       <span className="about-input-error popup__input-error"></span>
       <button
         id="edit-profile-button"
-        className="popup__submit-button"
+        className={`popup__submit-button ${
+          isLoading ? "popup__submit-button_loading" : ""
+        }`}
         type="submit"
       >
-        Salvar
+        {isLoading ? "Salvando..." : "Salvar"}
       </button>
     </form>
   );
