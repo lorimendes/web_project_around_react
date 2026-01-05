@@ -1,19 +1,22 @@
-# Tripleten - Around The U.S.
+# Tripleten - Around The U.S. (Versão React)
 
-O **Around The U.S.** é uma página interativa onde os usuários podem adicionar, remover e curtir fotos de locais dos Estados Unidos e também podem editar informações pessoais do perfil.
+O **Around The U.S.** é uma página interativa desenvolvida em React que permite aos usuários gerenciar uma galeria de fotos de locais, além de personalizar seu perfil. O projeto simula uma rede social focada em viagens.
 
 ## 🚀 Funcionalidades
 
-- **Perfil do usuário:** Adicione informações pessoais como nome e uma breve descrição sobre você.
-- **Galeria de fotos:** Veja, adicione ou remova fotos de paisagens de lugares.
-- **Interatividade:** Curta fotos da galeria.
+- **Gerenciamento de perfil:** edição de nome, ocupação e atualização de foto de avatar com persistência via API.
+- **Galeria interativa:** adição de novos cards de fotos e remoção de cards existentes com confirmação de exclusão.
+- **Sistema de likes:** funcionalidade de curtir fotos com atualização de estado.
+- **Feedback visual:** estados de carregamento durante as requisições à API e validação de formulários.
 
 ## 🛠️ Tecnologias e Técnicas Usadas
 
-- **HTML:** Estrutura do site.
-- **CSS:** Estilização e design da página.
-- **JavaScript e React:** Funcionalidade de interação com o usuário (abrir/fechar popups, editar perfil, adicionar e remover imagens).
-- **Responsividade:** O design foi feito para ser responsivo, adaptando-se a diferentes tamanhos de tela, com no mínimo 320px de largura.
+- **React.js:** biblioteca principal para construção da interface.
+- **Hooks (useState, useEffect, useRef, useContext):** gerenciamento de estado, efeitos colaterais e referências ao DOM.
+- **React Context API:** Utilizada para gerenciar os dados do usuário globalmente.
+- **Integração com API REST:** Comunicação assíncrona (Promises/Async-Await) para persistência de dados.
+- **Programação orientada a objetos:** reuso de lógica de validação de formulários via classe JavaScript.
+- **CSS Avançado:** metodologia BEM e design responsivo, adaptando-se a diferentes tamanhos de tela, com no mínimo 320px de largura.
 
 ## 📸 Demonstração do projeto
 
@@ -25,5 +28,5 @@ https://lorinogueira.github.io/web_project_around/
 
 ## 👩‍💻 Autor
 
-Desenvolvido por [Lorena Nogueira](https://github.com/lorinogueira).  
+Desenvolvido por [Lorena Mendes](https://github.com/lorimendes).  
 Conecte-se comigo no [LinkedIn](https://www.linkedin.com/in/lorenamendes0/).
