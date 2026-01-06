@@ -9,7 +9,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [popup, setPopup] = useState(null);
-  const [cards, setCards] = useState();
+  const [cards, setCards] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [cardToDelete, setCardToDelete] = useState(null);
 
