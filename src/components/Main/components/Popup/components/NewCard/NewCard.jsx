@@ -4,8 +4,8 @@ import { FormValidator } from "../../../../../../utils/formValidator";
 
 function NewCard() {
   const { handleAddCardSubmit, isLoading } = useContext(CurrentUserContext);
-  const [name, setName] = useState();
-  const [link, setLink] = useState();
+  const [name, setName] = useState("");
+  const [link, setLink] = useState("");
   const formRef = useRef();
 
   const handleSubmit = (event) => {
