@@ -54,10 +54,16 @@
   line-height: 48px;
   margin: 0 18px 16px 0;
   grid-area: name;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 500px;
 }
 
 .profile__about {
   grid-area: aboutme;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 500px;
 }
 
 .profile__edit-button {
@@ -115,6 +121,7 @@
   }
   .profile__name {
     margin: 0 10px 14px 0;
+    font-size: 28px;
   }
 }
 
@@ -134,12 +141,14 @@
     line-height: 31.63px;
     text-align: center;
     margin-bottom: 14px;
+    max-width: 350px;
   }
   .profile__about {
     font-size: 14px;
     line-height: 16.94px;
     text-align: center;
     margin-bottom: 36px;
+    max-width: 350px;
   }
   .profile__edit-button {
     margin: 0;
@@ -161,6 +170,7 @@
   .profile__name {
     font-size: 22px;
     line-height: 26.63px;
+    max-width: 250px;
   }
   .profile__about {
     font-size: 14px;
