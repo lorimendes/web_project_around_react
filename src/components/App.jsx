@@ -13,14 +13,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [cardToDelete, setCardToDelete] = useState(null);
 
-  function handleOpenPopup(popup) {
-    setPopup(popup);
-  }
-
-  function handleClosePopup() {
-    setPopup(null);
-  }
-
   useEffect(() => {
     (async () => {
       await api.getProfile().then((userInfo) => {
@@ -37,7 +29,7 @@ function App() {
         .updateProfile(userInfo)
         .then((newUserInfo) => {
           setCurrentUser(newUserInfo);
-          handleClosePopup();
+          setPopup(null);
         })
         .finally(() => {
           setIsLoading(false);
@@ -52,7 +44,7 @@ function App() {
         .updateAvatar(avatar)
         .then((newUserInfo) => {
           setCurrentUser(newUserInfo);
-          handleClosePopup();
+          setPopup(null);
         })
         .finally(() => {
           setIsLoading(false);
@@ -87,7 +79,7 @@ function App() {
           setCards(
             cards.filter((currentCard) => currentCard._id !== cardToDelete._id)
           );
-          handleClosePopup();
+          setPopup(null);
         })
         .finally(() => {
           setIsLoading(false);
@@ -102,7 +94,7 @@ function App() {
       await api
         .postCard(newCard)
         .then((newCard) => {
-          handleClosePopup();
+          setPopup(null);
           setCards([newCard, ...cards]);
         })
         .finally(() => {
@@ -131,8 +123,8 @@ function App() {
       <div className="page">
         <Header src={logo} />
         <Main
-          onOpenPopup={handleOpenPopup}
-          onClosePopup={handleClosePopup}
+          onOpenPopup={setPopup}
+          onClosePopup={() => setPopup(null)}
           popup={popup}
           cards={cards}
           onCardLike={handleCardLike}
