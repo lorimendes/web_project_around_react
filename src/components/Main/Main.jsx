@@ -31,7 +31,7 @@ function Main(props) {
           <img
             className="profile__avatar"
             src={currentUser && currentUser.avatar}
-            alt="Foto do usuário"
+            alt={`Foto de ${currentUser?.name}`}
           />
           <button
             className="profile__avatar-button"

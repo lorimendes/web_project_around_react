@@ -17,7 +17,7 @@ function Card({
       <img
         className="gallery__photo"
         src={link}
-        alt="Foto do local"
+        alt={name}
         onClick={() =>
           onOpen({
             children: <ImagePopup name={name} link={link} />,
