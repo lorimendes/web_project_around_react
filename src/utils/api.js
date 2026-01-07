@@ -1,81 +1,17 @@
 class Api {
-  constructor(token) {
+  constructor(baseUrl, token) {
+    this.baseUrl = baseUrl;
     this.token = token;
   }
 
-  getInfoFromApi(url) {
+  _request(url, method, body) {
     return fetch(url, {
+      ...(method && { method: method }),
       headers: {
         authorization: this.token,
+        ...(body && { "Content-Type": "application/json" }),
       },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-    });
-  }
-
-  updateProfile(item) {
-    return fetch(
-      "https://around-api.pt-br.tripleten-services.com/v1/users/me",
-      {
-        method: "PATCH",
-        headers: {
-          authorization: this.token,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: item.name,
-          about: item.about,
-        }),
-      }
-    )
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-      })
-      .catch((err) => {
-        console.log("Erro:", err);
-      });
-  }
-
-  updateAvatar(item) {
-    return fetch(
-      "https://around-api.pt-br.tripleten-services.com/v1/users/me/avatar",
-      {
-        method: "PATCH",
-        headers: {
-          authorization: this.token,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          avatar: item.avatar,
-        }),
-      }
-    )
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-      })
-      .catch((err) => {
-        console.log("Erro:", err);
-      });
-  }
-
-  postCard(item) {
-    return fetch("https://around-api.pt-br.tripleten-services.com/v1/cards/", {
-      method: "POST",
-      headers: {
-        authorization: this.token,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: item.name,
-        link: item.link,
-        isLiked: false,
-      }),
+      ...(body && { body: JSON.stringify(body) }),
     })
       .then((res) => {
         if (res.ok) {
@@ -83,47 +19,59 @@ class Api {
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.log("Erro:", err);
       });
   }
 
-  deleteCard(url) {
-    return fetch(url, {
-      method: "DELETE",
-      headers: {
-        authorization: this.token,
-        "Content-Type": "application/json",
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
+  getProfile() {
+    return this._request(`${this.baseUrl}/users/me`);
+  }
+
+  getCards() {
+    return this._request(`${this.baseUrl}/cards`);
+  }
+
+  updateProfile({ name, about }) {
+    return this._request(`${this.baseUrl}/users/me`, "PATCH", { name, about });
+  }
+
+  updateAvatar({ avatar }) {
+    return this._request(`${this.baseUrl}/users/me/avatar`, "PATCH", {
+      avatar,
     });
   }
 
-  updateLike(url, item) {
+  postCard({ name, link }) {
+    return this._request(`${this.baseUrl}/cards`, "POST", {
+      name,
+      link,
+      isLiked: false,
+    });
+  }
+
+  deleteCard(cardToDelete) {
+    return this._request(`${this.baseUrl}/cards/${cardToDelete._id}`, "DELETE");
+  }
+
+  updateLike(cardToUpdate) {
     let method;
 
-    if (!item.isLiked) {
+    if (!cardToUpdate.isLiked) {
       method = "PUT";
     } else {
       method = "DELETE";
     }
 
-    return fetch(url, {
-      method: method,
-      headers: {
-        authorization: this.token,
-        "Content-Type": "application/json",
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-    });
+    return this._request(
+      `${this.baseUrl}/cards/${cardToUpdate._id}/likes`,
+      method
+    );
   }
 }
 
-const api = new Api("a1ae33fa-92c8-4fb4-90f3-3874e08185b4");
+const api = new Api(
+  "https://around-api.pt-br.tripleten-services.com/v1",
+  "a1ae33fa-92c8-4fb4-90f3-3874e08185b4"
+);
 
 export { api };

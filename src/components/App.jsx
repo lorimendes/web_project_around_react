@@ -23,13 +23,10 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      await api
-        .getInfoFromApi(
-          "https://around-api.pt-br.tripleten-services.com/v1/users/me"
-        )
-        .then((userInfo) => {
-          setCurrentUser(userInfo);
-        });
+      await api.getProfile().then((userInfo) => {
+        setCurrentUser(userInfo);
+        console.log(userInfo.avatar);
+      });
     })();
   }, []);
 
@@ -63,15 +60,12 @@ function App() {
     })();
   };
 
-  async function handleCardLike(card) {
+  async function handleCardLike(cardToUpdate) {
     try {
-      const updatedCard = await api.updateLike(
-        `https://around-api.pt-br.tripleten-services.com/v1/cards/${card._id}/likes`,
-        card
-      );
+      const updatedCard = await api.updateLike(cardToUpdate);
       setCards((state) =>
         state.map((currentCard) =>
-          currentCard._id == card._id ? updatedCard : currentCard
+          currentCard._id == cardToUpdate._id ? updatedCard : currentCard
         )
       );
     } catch (error) {
@@ -88,9 +82,7 @@ function App() {
     setIsLoading(true);
     (async () => {
       await api
-        .deleteCard(
-          `https://around-api.pt-br.tripleten-services.com/v1/cards/${cardToDelete._id}`
-        )
+        .deleteCard(cardToDelete)
         .then(() => {
           setCards(
             cards.filter((currentCard) => currentCard._id !== cardToDelete._id)
@@ -120,13 +112,9 @@ function App() {
   };
 
   useEffect(() => {
-    api
-      .getInfoFromApi(
-        "https://around-api.pt-br.tripleten-services.com/v1/cards/"
-      )
-      .then((cardsFromApi) => {
-        setCards(cardsFromApi);
-      });
+    api.getCards().then((cardsFromApi) => {
+      setCards(cardsFromApi);
+    });
   }, []);
 
   return (
